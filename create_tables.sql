@@ -24,24 +24,25 @@ year INT,
 quarter VARCHAR(50)
 );
 
+
 CREATE TABLE dim_category (
-categoryID INT PRIMARY KEY SERIAL,
+categoryID SERIAL PRIMARY KEY,
 category_name VARCHAR(225),
 sub_category_name VARCHAR(225)
 );
 
 CREATE TABLE dim_segment (
-segmentID INT PRIMARY KEY SERIAL,
+segmentID SERIAL PRIMARY KEY,
 segment_name VARCHAR(225)
 );
 
 CREATE TABLE dim_order_mode (
-orderModeID INT PRIMARY KEY SERIAL,
+orderModeID SERIAL PRIMARY KEY,
 mode_name VARCHAR(225)
 );
 
 CREATE TABLE fact_sales (
-salesID INT PRIMARY KEY SERIAL,
+salesID SERIAL PRIMARY KEY,
 customerID VARCHAR(225) NOT NULL,
 productID VARCHAR(225) NOT NULL,
 locationID VARCHAR (225) NOT NULL,
