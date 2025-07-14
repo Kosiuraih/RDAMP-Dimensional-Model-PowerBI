@@ -33,4 +33,3 @@ FROM fact_sales fs
 JOIN dim_customer dc ON fs.customerID = dc.customerID
 JOIN dim_segment ds ON fs.segmentID = ds.segmentID
 GROUP BY ds.segment_name, dc.customerName;
-
