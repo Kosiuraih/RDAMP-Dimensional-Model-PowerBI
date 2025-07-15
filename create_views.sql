@@ -33,3 +33,24 @@ FROM fact_sales fs
 JOIN dim_customer dc ON fs.customerID = dc.customerID
 JOIN dim_segment ds ON fs.segmentID = ds.segmentID
 GROUP BY ds.segment_name, dc.customerName;
+
+CREATE VIEW vw_channel_margin_report AS
+SELECT 
+dom.mode_name AS sales_channel,
+SUM(fs.totalSales) AS total_sales,
+SUM(fs.profit) AS total_profit,
+ROUND(SUM(fs.profit) / NULLIF(SUM(fs.totalSales), 0), 2) AS profit_margin
+FROM fact_sales fs
+JOIN dim_order_mode dom ON fs.orderModeID = dom.orderModeID
+GROUP BY dom.mode_name;
+
+CREATE VIEW vw_region_category_rankings AS
+SELECT 
+dl.region,
+dc.category_name,
+SUM(fs.profit) AS total_profit,
+RANK() OVER (PARTITION BY dl.region ORDER BY SUM(fs.profit) DESC) AS category_rank
+FROM fact_sales fs
+JOIN dim_location dl ON fs.locationID = dl.locationID
+JOIN dim_category dc ON fs.categoryID = dc.categoryID
+GROUP BY dl.region, dc.category_name;
