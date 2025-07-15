@@ -10,7 +10,6 @@ INSERT INTO dim_product (productID, productName)
 VALUES 
 ('P001', 'Flavored Popcorn Mix'),
 ('P002', 'Olive Oil'),
-('P003', 'Children\'s Backpack');
 
 -- Populate dim_location
 INSERT INTO dim_location (locationID, city, postCode, region, country)
@@ -29,7 +28,7 @@ VALUES
 INSERT INTO dim_category (category_name, sub_category_name)
 VALUES 
 ('Food - Snacks', 'Gourmet Snacks'),
-('Accessories', 'Kids\' Bags');
+('Accessories', 'Kids Bags');
 
 -- Populate dim_segment
 INSERT INTO dim_segment (segment_name)
