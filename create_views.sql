@@ -1,14 +1,3 @@
-CREATE VIEW vw_discount_impact_analysis AS
-SELECT 
-dp.productName,
-fs.discountAmount,
-SUM(fs.totalSales) AS total_sales,
-SUM(fs.profit) AS total_profit,
-COUNT(*) AS number_of_orders
-FROM fact_sales fs
-JOIN dim_product dp ON fs.productID = dp.productID
-GROUP BY dp.productName, fs.discountAmount;
-
 CREATE VIEW vw_product_seasonality AS
 SELECT 
 dp.productName,
@@ -21,6 +10,17 @@ FROM fact_sales fs
 JOIN dim_product dp ON fs.productID = dp.productID
 JOIN dim_date dd ON fs.dateID = dd.dateID
 GROUP BY dp.productName, dd.year, dd.month, dd.quarter;
+
+CREATE VIEW vw_discount_impact_analysis AS
+SELECT 
+dp.productName,
+fs.discountAmount,
+SUM(fs.totalSales) AS total_sales,
+SUM(fs.profit) AS total_profit,
+COUNT(*) AS number_of_orders
+FROM fact_sales fs
+JOIN dim_product dp ON fs.productID = dp.productID
+GROUP BY dp.productName, fs.discountAmount;
 
 CREATE VIEW vw_customer_order_patterns AS
 SELECT 
